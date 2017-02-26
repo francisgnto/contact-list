@@ -49,9 +49,20 @@ block content
       markup = markup.join("")
       $( ".tbody" ).append( markup );
       $( ".tr" ).click(viewCard);
+      $('#nameSearch').keyup(function(e){
+        var selector = $('#nameSearch').val();
+        $( "li" ).hide();
+        $( "li:contains("+selector+")" ).show();
+        if ($( "span.data:contains("+selector+")" ).length == 0){
+          $('#contacts-caption-text').html('No results');
+        } else {
+          $('#contacts-caption-text').html('Contact List');
+        }
+      });
     });
+  <input id="nameSearch" type="text" class="form-control" placeholder="Search for...">
   <div class="contacts table" aria-labelledby="contacts-caption-text">
-  <span class="caption" id="contacts-caption-text">Responsive contact list</span>
+  <span class="caption" id="contacts-caption-text">Contact List</span>
   <div class="contacts-header thead">
     <span class="th" id="th-name">Name:</span>
     <span class="th" id="th-org">Organization:</span>

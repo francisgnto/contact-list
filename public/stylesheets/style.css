@@ -14,7 +14,7 @@ a {
 }
 
 body{
-  margin-top: 200px;
+  /*margin-top: 200px;*/
   font-size: 16px;
   line-height: 1.5;
 }
@@ -63,7 +63,7 @@ body{
 }
 
 .label{
-  display: none;
+  display: none !important;
 }
 
 @media all and (max-width: 600px){
