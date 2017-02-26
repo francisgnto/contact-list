@@ -2,4 +2,53 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  //- p Welcome to #{title}
+  script.
+    var cards = []; // keep the cards here
+    $.getJSON( "http://jsonplaceholder.typicode.com/users", function( data ) {
+      console.log(data);
+      var markup = [];
+      $.each( data, function() {
+        cards.push(this);
+        var personName = this.name;
+        var companyName = this.company.name;
+        var personPhone = this.phone;
+        var personEmail = this.email;
+        /*items.push( "<li id='" + key + "'>" + val + "</li>" );*/
+        var newCard = '<li class="tr" itemscope itemtype="http://schema.org/Person">'+
+              '<span class="td">'+
+                '<span class="label">Name:</span>'+
+                '<span class="data" itemprop="name" aria-labelledby="th-name">'+personName+'</span>'+
+              '</span>'+
+              '<span class="td" itemscope itemtype="http://schema.org/Organization">'+
+                '<span class="label">Organisation:</span>'+
+                '<span class="data" itemprop="name" aria-labelledby="th-org">'+companyName+'</span>'+
+              '</span>'+
+              '<span class="td">'+
+                '<span class="label">Phone:</span>'+
+                '<span class="data" itemprop="telephone" aria-labelledby="th-phone">'+personPhone+'</span>'+
+              '</span>'+
+              '<span class="td">'+
+                '<span class="label">Email:</span>'+
+                '<span class="data" itemprop="email" aria-labelledby="th-email"><a href="mailto:'+personEmail+'">Email</a></span>'+
+              '</span>'+
+            '</li>';
+        markup.push(newCard)
+      });
+      /*console.log('markup', markup);*/
+      markup = markup.join("")
+      $( ".tbody" ).append( markup );
+      /*$({
+        html: markup.join( "" )
+      }).appendTo( ".tbody" );*/
+    });
+  <div class="contacts table" aria-labelledby="contacts-caption-text">
+  <span class="caption" id="contacts-caption-text">Responsive contact list</span>
+  <div class="contacts-header thead">
+    <span class="th" id="th-name">Name:</span>
+    <span class="th" id="th-org">Organization:</span>
+    <span class="th" id="th-phone">Phone:</span>
+    <span class="th" id="th-email">Email:</span>
+  </div>
+  <ul class="tbody">
+  </ul>
