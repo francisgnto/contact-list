@@ -3,6 +3,8 @@
 created in a few hours for the Orion Frontend Developer test. 
 
 npm install && npm start
+/index
+/admin
 
 Acknowledgements:
 Node.js
