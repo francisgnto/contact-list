@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  h1 admin page
+  script.
+    function countInArray(array, what) {
+      var count = 0;
+      for (var i = 0; i < array.length; i++) {
+          if (array[i] === what) {
+              count++;
+          }
+      }
+      return count;
+    }
+    var letters = [];
+    var counted = [];
+    $.getJSON( "http://jsonplaceholder.typicode.com/users", function( data ) {
+      $.each( data, function() {
+        var letter = this.name.charAt(0);
+        letters.push(letter);
+
+      });
+      console.log(letters);
+      for(var i = 0; i < letters.length; i++){
+        if(counted.indexOf(letters[i]) < 0){
+          counted.push(letters[i]);
+          var number = countInArray(letters, letters[i]);
+          var pluralityAre = 'is ';
+          var pluralityContacts = 'contact ';
+          var pluralityStarts = 'starts ';
+          if(number > 1){pluralityAre = 'are ';pluralityContacts = 'contacts ',pluralityStarts = 'start '}
+          var markup = '<p>There '+pluralityAre+number+' '+pluralityContacts+'that '+pluralityStarts+'with the letter '+letters[i]+'</p>';
+          $('#counts').append(markup);
+          /*console.log(markup);*/
+        }
+      }
+    });
+
+
+  h3 Letter count for users:
+  div#counts

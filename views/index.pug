@@ -17,7 +17,6 @@ block content
     }
     var cards = []; // keep the cards here
     $.getJSON( "http://jsonplaceholder.typicode.com/users", function( data ) {
-      /*console.log(data);*/
       var markup = [];
       $.each( data, function() {
         cards.push(this);
@@ -60,7 +59,7 @@ block content
         }
       });
     });
-  <input id="nameSearch" type="text" class="form-control" placeholder="Search for...">
+  <input id="nameSearch" type="text" class="form-control" placeholder="Search for...(case-sensitive)">
   <div class="contacts table" aria-labelledby="contacts-caption-text">
   <span class="caption" id="contacts-caption-text">Contact List</span>
   <div class="contacts-header thead">
